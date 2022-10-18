@@ -4,10 +4,9 @@ import styles from "./header.module.scss";
 
 interface HeaderProps {
   started: boolean;
-  score: number;
 }
 
-export const Header: FC<HeaderProps> = ({ started, score }) => {
+export const Header: FC<HeaderProps> = ({ started }) => {
   useEffect(() => {
     console.log("Rerender");
   }, []);
@@ -19,7 +18,7 @@ export const Header: FC<HeaderProps> = ({ started, score }) => {
       className={styles.header}
     >
       <h1>Trivia Game</h1>
-      {started && <h3>SCORE : {score}</h3>}
+      {started && <h3>SCORE : {0}</h3>}
     </header>
   );
 };

@@ -1,15 +1,11 @@
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { QuestionsService } from "infra/services";
 import { Question } from "domain/models";
 
 import styles from "./trivia.module.scss";
 import { Spinner, Question as QuestionUI, Answer } from "components";
 
-interface TriviaProps {
-  score: number;
-}
-
-export const Trivia: FC<TriviaProps> = ({ score }) => {
+export const Trivia = () => {
   const [count, setCount] = useState(1);
   const [question, setQuestion] = useState<Question | null>(null);
 

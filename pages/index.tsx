@@ -7,7 +7,6 @@ import { useState } from "react";
 
 const HomePage: NextPage = () => {
   const [start, setStart] = useState(false);
-  const [score, setScore] = useState(0);
 
   function startTrivia() {
     setStart(true);
@@ -22,9 +21,9 @@ const HomePage: NextPage = () => {
       </Head>
 
       <div className="container">
-        <Header started={start} score={score} />
+        <Header started={start} />
         {!start && <Menu startHandler={startTrivia} highScore={200} />}
-        {start && <Trivia score={score} />}
+        {start && <Trivia />}
       </div>
     </div>
   );
