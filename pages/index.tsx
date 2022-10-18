@@ -5,7 +5,7 @@ import { useMenuStore } from "domain/store";
 import { MenuTypes } from "app/constants";
 
 import styles from "../styles/Home.module.css";
-import { Header, Menu, Trivia } from "components";
+import { About, Header, Menu, TopScores, Trivia } from "components";
 
 const HomePage: NextPage = () => {
   const [start, setStart] = useState(false);
@@ -24,6 +24,8 @@ const HomePage: NextPage = () => {
         <Header started={start} />
         {!openedMenu && <Menu />}
         {openedMenu === MenuTypes.GAME && <Trivia />}
+        {openedMenu === MenuTypes.TOP_SCORES && <TopScores />}
+        {openedMenu === MenuTypes.ABOUT && <About />}
       </div>
     </div>
   );
