@@ -14,8 +14,13 @@ export const TopScores = () => {
       scores = JSON.parse(localStorage.getItem("SCORES")!);
     }
 
-    const sortedScores = sortScores(scores);
-    setScores(sortScores);
+    let sortedScores = sortScores(scores);
+    if (sortScores.length > 5) {
+      sortedScores = sortedScores.slice(0, 6);
+    }
+    setScores(sortedScores);
+
+    localStorage.setItem("SCORES", JSON.stringify(sortedScores));
   }, []);
   return (
     <section className={styles.scores}>

@@ -14,7 +14,13 @@ export const Result = () => {
     if (localStorage.getItem("SCORES")) {
       scores = JSON.parse(localStorage.getItem("SCORES")!);
     }
-    console.log(scores);
+    const newScore = {
+      score: scoreStore.score,
+      date: new Date().toDateString(),
+    };
+    scores.push(newScore);
+
+    localStorage.setItem("SCORES", JSON.stringify(scores));
   }, []);
 
   return (
