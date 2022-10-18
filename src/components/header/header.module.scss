@@ -3,8 +3,17 @@
   margin-bottom: 2rem;
   display: flex;
   align-items: center;
+  position: relative;
 
   h1 {
     transition: text-align 1s ease-in;
+  }
+
+  .backNav {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 1rem;
+    top: 5px;
   }
 }

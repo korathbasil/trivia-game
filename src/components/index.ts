@@ -6,3 +6,4 @@ export { Answer } from "./answer/answer";
 export { Spinner } from "./spinner/spinner";
 export { TopScores } from "./top-scores/top-scores";
 export { About } from "./about/about";
+export { BackArrow } from "./back-arrow/back-arrow";

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useMenuStore } from "domain/store";
@@ -8,8 +7,6 @@ import styles from "../styles/Home.module.css";
 import { About, Header, Menu, TopScores, Trivia } from "components";
 
 const HomePage: NextPage = () => {
-  const [start, setStart] = useState(false);
-
   const openedMenu = useMenuStore((state) => state.openedMenu);
 
   return (
@@ -21,7 +18,7 @@ const HomePage: NextPage = () => {
       </Head>
 
       <div className="container">
-        <Header started={start} />
+        <Header />
         {!openedMenu && <Menu />}
         {openedMenu === MenuTypes.GAME && <Trivia />}
         {openedMenu === MenuTypes.TOP_SCORES && <TopScores />}

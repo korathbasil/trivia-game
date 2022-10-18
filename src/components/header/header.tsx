@@ -1,23 +1,35 @@
-import { useScoreStore } from "domain/store";
-import { FC, useEffect } from "react";
+import { MenuTypes } from "app/constants";
+import { useMenuStore, useScoreStore } from "domain/store";
 
 import styles from "./header.module.scss";
+import { BackArrow } from "components";
 
-interface HeaderProps {
-  started: boolean;
-}
-
-export const Header: FC<HeaderProps> = ({ started }) => {
+export const Header = () => {
   const score = useScoreStore((state) => state.score);
+  const openedMenu = useMenuStore((state) => state.openedMenu);
+  const setOpenedMenu = useMenuStore((state) => state.setOpenedMenu);
+
   return (
     <header
       style={{
-        justifyContent: started ? "space-between" : "center",
+        justifyContent:
+          openedMenu === MenuTypes.GAME ? "space-between" : "center",
       }}
       className={styles.header}
     >
+      {(openedMenu === MenuTypes.TOP_SCORES ||
+        openedMenu === MenuTypes.ABOUT) && (
+        <div
+          onClick={() => {
+            setOpenedMenu("");
+          }}
+          className={styles.backNav}
+        >
+          <BackArrow />
+        </div>
+      )}
       <h1>Trivia Game</h1>
-      {started && <h3>SCORE : {score}</h3>}
+      {openedMenu === MenuTypes.GAME && <h3>SCORE : {score}</h3>}
     </header>
   );
 };
