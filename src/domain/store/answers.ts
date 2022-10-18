@@ -7,6 +7,7 @@ interface AnswersStoreState {
   increaseCorrect: () => void;
   increaseIncorrect: () => void;
   increaseUnattended: () => void;
+  reset: () => void;
 }
 
 export const useAnswersStore = create<AnswersStoreState>((set) => ({
@@ -17,4 +18,10 @@ export const useAnswersStore = create<AnswersStoreState>((set) => ({
   increaseIncorrect: () => set((state) => ({ incorrect: state.incorrect + 1 })),
   increaseUnattended: () =>
     set((state) => ({ unattended: state.unattended + 1 })),
+  reset: () =>
+    set({
+      correct: 0,
+      incorrect: 0,
+      unattended: 0,
+    }),
 }));

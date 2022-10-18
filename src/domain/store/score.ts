@@ -4,6 +4,7 @@ interface ScoreStoreState {
   score: number;
   increaseScore: (n: number) => void;
   decreaseScore: (n: number) => void;
+  reset: () => void;
 }
 
 export const useScoreStore = create<ScoreStoreState>((set) => ({
@@ -12,4 +13,6 @@ export const useScoreStore = create<ScoreStoreState>((set) => ({
     set((state: ScoreStoreState) => ({ score: state.score + n })),
   decreaseScore: (n: number) =>
     set((state: ScoreStoreState) => ({ score: state.score - n })),
+
+  reset: () => set({ score: 0 }),
 }));

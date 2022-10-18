@@ -36,6 +36,7 @@ export const Answer: FC<AnswerPops> = ({
 
   const [answer, setAnswer] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [points, setPoints] = useState(10);
 
   useEffect(() => {
     const tick = setInterval(() => {
@@ -58,10 +59,11 @@ export const Answer: FC<AnswerPops> = ({
     if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
       increaseCorrect();
       const points = timer * 10;
+      setPoints(points);
       increaseScore(points);
     } else {
       increaseIncorrect();
-      decreaseScore(5);
+      decreaseScore(50);
     }
   }
   return (
@@ -111,12 +113,12 @@ export const Answer: FC<AnswerPops> = ({
             style={{
               color:
                 answer.toLowerCase() === correctAnswer.toLowerCase()
-                  ? "var(--clr-light-green)"
+                  ? "var(--clr-green-yellow)"
                   : "var(--clr-danger)",
             }}
           >
             {answer.toLowerCase() === correctAnswer.toLowerCase()
-              ? `Correct Answer +10 points`
+              ? `Correct Answer ${points} points`
               : "Incorrect Answer"}
           </h3>
         )}
