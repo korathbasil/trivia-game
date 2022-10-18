@@ -13,6 +13,7 @@ body {
     --clr-primary: yellow;
     --clr-green-yellow:greenyellow;
     --clr-bg: black;
+    --clr-danger: red;
     
     font-family: 'Courier Prime', monospace;
     background-color: var(--clr-bg);
