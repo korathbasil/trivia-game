@@ -33,6 +33,7 @@ export const Trivia = () => {
       )}
       {question && <QuestionUI question={question.question} />}
       {question && <Answer />}
+      <p className={styles.title}>Question {count}</p>
     </section>
   );
 };

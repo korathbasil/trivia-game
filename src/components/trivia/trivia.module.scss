@@ -1,6 +1,7 @@
 .trivia {
   border: 2px solid var(--clr-primary);
   padding: 1.5rem;
+  position: relative;
 
   .spinnerContainer {
     width: 100%;
@@ -8,5 +9,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .title {
+    position: absolute;
+    background-color: var(--clr-bg);
+    z-index: 1;
+    padding: 0.5rem;
+    top: -16px;
+    left: 20px;
   }
 }
