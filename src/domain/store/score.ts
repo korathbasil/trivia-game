@@ -11,10 +11,5 @@ export const useScoreStore = create<ScoreStoreState>((set) => ({
   increaseScore: (n: number) =>
     set((state: ScoreStoreState) => ({ score: state.score + n })),
   decreaseScore: (n: number) =>
-    set((state: ScoreStoreState) => {
-      if (state.score - n < 0) {
-        return { score: 0 };
-      }
-      return { score: state.score - n };
-    }),
+    set((state: ScoreStoreState) => ({ score: state.score - n })),
 }));

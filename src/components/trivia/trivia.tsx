@@ -4,8 +4,12 @@ import { Question } from "domain/models";
 
 import styles from "./trivia.module.scss";
 import { Spinner, Question as QuestionUI, Answer } from "components";
+import { useTimerStore } from "domain/store";
 
 export const Trivia = () => {
+  const timer = useTimerStore((state) => state.timer);
+  const resetTimer = useTimerStore((state) => state.resetTimer);
+
   const [count, setCount] = useState(1);
   const [question, setQuestion] = useState<Question | null>(null);
 
@@ -37,7 +41,7 @@ export const Trivia = () => {
           <Spinner />
         </div>
       )}
-      {question && <QuestionUI question={question.question} />}
+      {question && <QuestionUI question={question.question} timer={timer} />}
       {question && (
         <Answer
           correctAnswer={question.correct_answer}

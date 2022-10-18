@@ -6,26 +6,10 @@ import { useTimerStore } from "domain/store";
 
 interface QuestionProps {
   question: string;
+  timer: number;
 }
 
-export const Question: FC<QuestionProps> = ({ question }) => {
-  const timer = useTimerStore((state) => state.timer);
-  const decreaseTimer = useTimerStore((st) => st.decreaseTimer);
-
-  useEffect(() => {
-    const tick = setTimeout(() => {
-      if (timer > 0) {
-        decreaseTimer(1);
-      } else {
-        clearTimeout(tick);
-      }
-    }, 1000);
-
-    return () => {
-      clearTimeout(tick);
-    };
-  }, [timer]);
-
+export const Question: FC<QuestionProps> = ({ question, timer }) => {
   return (
     <div className={styles.div}>
       <p>{serializeQuestion(question)}</p>
