@@ -11,6 +11,7 @@ body {
 
     /* Colors */
     --clr-primary: yellow;
+    --clr-green-yellow:greenyellow;
     --clr-bg: black;
     
     font-family: 'Courier Prime', monospace;
@@ -27,6 +28,7 @@ a {
   width: 100%;
   max-width: 800px;
   margin: 300px auto;
+  padding: 1rem;
 }
 
 /* @media (prefers-color-scheme: dark) {
