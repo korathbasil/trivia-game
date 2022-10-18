@@ -11,9 +11,10 @@ body {
 
     /* Colors */
     --clr-primary: yellow;
+    --clr-bg: black;
     
     font-family: 'Courier Prime', monospace;
-    background-color: black;
+    background-color: var(--clr-bg);
     color: var(--clr-primary);
 }
 
