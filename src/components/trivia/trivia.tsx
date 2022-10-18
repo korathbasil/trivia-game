@@ -3,19 +3,19 @@ import { QuestionsService } from "infra/services";
 import { Question } from "domain/models";
 
 import styles from "./trivia.module.scss";
-import { Question as QuestionUI } from "components";
+import { Spinner, Question as QuestionUI, Answer } from "components";
 
 export const Trivia = () => {
   const [count, setCount] = useState(1);
 
-  const [q, setQ] = useState<Question | null>(null);
+  const [question, setQuestion] = useState<Question | null>(null);
 
   async function fetchQuestion() {
     try {
       const questions = await QuestionsService.getOneQuestion();
 
       if (questions) {
-        setQ(questions[0]);
+        setQuestion(questions[0]);
       }
     } catch (error) {}
   }
@@ -26,7 +26,13 @@ export const Trivia = () => {
   }, []);
   return (
     <section className={styles.trivia}>
-      {q && <QuestionUI question={q.question} />}
+      {!question && (
+        <div className={styles.spinnerContainer}>
+          <Spinner />
+        </div>
+      )}
+      {question && <QuestionUI question={question.question} />}
+      {question && <Answer />}
     </section>
   );
 };

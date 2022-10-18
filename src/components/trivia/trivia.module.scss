@@ -1,4 +1,12 @@
 .trivia {
   border: 2px solid var(--clr-primary);
   padding: 1.5rem;
+
+  .spinnerContainer {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
