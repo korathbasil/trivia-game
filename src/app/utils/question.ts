@@ -1,3 +1,5 @@
 export function serializeQuestion(q: string) {
-  return q.split("&quot;");
+  q = q.replace("&quot;", '"');
+  q = q.replace("&#039;", "'");
+  return q;
 }
