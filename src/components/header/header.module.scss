@@ -1,6 +1,8 @@
 .header {
   width: 100%;
   margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
 
   h1 {
     transition: text-align 1s ease-in;

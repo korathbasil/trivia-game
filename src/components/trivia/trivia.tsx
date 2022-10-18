@@ -1,14 +1,28 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { QuestionsService } from "infra/services";
 import { Question } from "domain/models";
 
 import styles from "./trivia.module.scss";
 import { Spinner, Question as QuestionUI, Answer } from "components";
 
-export const Trivia = () => {
-  const [count, setCount] = useState(1);
+interface TriviaProps {
+  score: number;
+}
 
+export const Trivia: FC<TriviaProps> = ({ score }) => {
+  const [count, setCount] = useState(1);
   const [question, setQuestion] = useState<Question | null>(null);
+
+  useEffect(() => {
+    fetchQuestion();
+  }, [count]);
+
+  function handleNext() {
+    if (count <= 15) {
+      setCount((c) => c + 1);
+      setQuestion(null);
+    }
+  }
 
   async function fetchQuestion() {
     try {
@@ -20,10 +34,6 @@ export const Trivia = () => {
     } catch (error) {}
   }
 
-  useEffect(() => {
-    fetchQuestion();
-    console.log("fetching");
-  }, []);
   return (
     <section className={styles.trivia}>
       {!question && (
@@ -32,7 +42,13 @@ export const Trivia = () => {
         </div>
       )}
       {question && <QuestionUI question={question.question} />}
-      {question && <Answer />}
+      {question && (
+        <Answer
+          correctAnswer={question.correct_answer}
+          questionCount={count}
+          handleNext={handleNext}
+        />
+      )}
       <p className={styles.title}>Question {count}</p>
     </section>
   );

@@ -4,21 +4,22 @@ import styles from "./header.module.scss";
 
 interface HeaderProps {
   started: boolean;
+  score: number;
 }
 
-export const Header: FC<HeaderProps> = ({ started }) => {
+export const Header: FC<HeaderProps> = ({ started, score }) => {
   useEffect(() => {
     console.log("Rerender");
   }, []);
   return (
-    <header className={styles.header}>
-      <h1
-        style={{
-          textAlign: started ? "left" : "center",
-        }}
-      >
-        Trivia Game
-      </h1>
+    <header
+      style={{
+        justifyContent: started ? "space-between" : "center",
+      }}
+      className={styles.header}
+    >
+      <h1>Trivia Game</h1>
+      {started && <h3>SCORE : {score}</h3>}
     </header>
   );
 };
