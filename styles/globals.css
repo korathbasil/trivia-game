@@ -8,10 +8,13 @@ html,
 body {
   /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+
+    /* Colors */
+    --clr-primary: yellow;
     
     font-family: 'Courier Prime', monospace;
     background-color: black;
-    color: yellow;
+    color: var(--clr-primary);
 }
 
 a {
