@@ -10,9 +10,10 @@
     gap: 1rem;
 
     p {
-      flex: 1;
+      flex: 0.38;
 
       &:nth-child(1) {
+        flex: 0.62;
         display: flex;
         justify-content: flex-end;
       }
