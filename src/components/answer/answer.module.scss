@@ -20,6 +20,7 @@
   .actions {
     display: flex;
     gap: 1rem;
+    align-items: center;
 
     button {
       border: none;
@@ -31,6 +32,12 @@
       font-family: "Courier Prime", monospace;
       font-size: 16px;
       font-weight: 800;
+
+      &:disabled {
+        background-color: lightgrey;
+        color: grey;
+        cursor: not-allowed;
+      }
     }
 
     div {
@@ -39,6 +46,11 @@
       color: var(--clr-bg);
       font-size: 16px;
       font-weight: 800;
+      cursor: pointer;
+    }
+
+    h3 {
+      margin: 0 auto;
     }
   }
 }
