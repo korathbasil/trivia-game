@@ -1,0 +1,19 @@
+.scores {
+  .border {
+    height: 3px;
+    width: 100%;
+    background-color: var(--clr-primary);
+    margin-bottom: 2rem;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  .messageContainer {
+    min-height: 100px;
+    width: 100%;
+    display: grid;
+    place-items: center;
+  }
+}

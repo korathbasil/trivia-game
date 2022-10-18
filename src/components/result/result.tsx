@@ -1,10 +1,21 @@
+import { Score } from "domain/models";
 import { useAnswersStore, useMenuStore, useScoreStore } from "domain/store";
+import { useEffect } from "react";
 import styles from "./result.module.scss";
 
 export const Result = () => {
   const setOpenedMenu = useMenuStore((state) => state.setOpenedMenu);
   const answersStore = useAnswersStore();
   const scoreStore = useScoreStore();
+
+  useEffect(() => {
+    let scores: Score[] = [];
+
+    if (localStorage.getItem("SCORES")) {
+      scores = JSON.parse(localStorage.getItem("SCORES")!);
+    }
+    console.log(scores);
+  }, []);
 
   return (
     <section className={styles.result}>
