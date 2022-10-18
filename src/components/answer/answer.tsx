@@ -1,4 +1,10 @@
-import { useScoreStore, useTimerStore } from "domain/store";
+import { MenuTypes } from "app/constants";
+import {
+  useAnswersStore,
+  useMenuStore,
+  useScoreStore,
+  useTimerStore,
+} from "domain/store";
 import { FC, FormEvent, useEffect, useState } from "react";
 import styles from "./answer.module.scss";
 
@@ -13,12 +19,20 @@ export const Answer: FC<AnswerPops> = ({
   questionCount,
   handleNext,
 }) => {
+  const setOpenedMenu = useMenuStore((state) => state.setOpenedMenu);
+
   const timer = useTimerStore((state) => state.timer);
   const decreaseTimer = useTimerStore((st) => st.decreaseTimer);
   const resetTimer = useTimerStore((state) => state.resetTimer);
 
   const increaseScore = useScoreStore((state) => state.increaseScore);
   const decreaseScore = useScoreStore((state) => state.decreaseScore);
+
+  const increaseCorrect = useAnswersStore((state) => state.increaseCorrect);
+  const increaseIncorrect = useAnswersStore((state) => state.increaseIncorrect);
+  const increaseUnattended = useAnswersStore(
+    (state) => state.increaseUnattended
+  );
 
   const [answer, setAnswer] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -42,9 +56,11 @@ export const Answer: FC<AnswerPops> = ({
     setSubmitted(true);
 
     if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
-      const points = (15 - timer) * 10;
+      increaseCorrect();
+      const points = timer * 10;
       increaseScore(points);
     } else {
+      increaseIncorrect();
       decreaseScore(5);
     }
   }
@@ -66,6 +82,9 @@ export const Answer: FC<AnswerPops> = ({
         {questionCount < 15 && (
           <div
             onClick={() => {
+              if (!submitted) {
+                increaseUnattended();
+              }
               resetTimer();
               handleNext();
             }}
@@ -76,9 +95,12 @@ export const Answer: FC<AnswerPops> = ({
         {questionCount >= 15 && (
           <div
             onClick={() => {
+              if (!submitted) {
+                increaseUnattended();
+              }
               setSubmitted(true);
               resetTimer();
-              handleNext();
+              setOpenedMenu(MenuTypes.RESULT);
             }}
           >
             <p>See Results</p>
