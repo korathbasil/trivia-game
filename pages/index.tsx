@@ -1,16 +1,16 @@
+import { useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useMenuStore } from "domain/store";
+import { MenuTypes } from "app/constants";
 
 import styles from "../styles/Home.module.css";
 import { Header, Menu, Trivia } from "components";
-import { useState } from "react";
 
 const HomePage: NextPage = () => {
   const [start, setStart] = useState(false);
 
-  function startTrivia() {
-    setStart(true);
-  }
+  const openedMenu = useMenuStore((state) => state.openedMenu);
 
   return (
     <div className={styles.container}>
@@ -22,8 +22,8 @@ const HomePage: NextPage = () => {
 
       <div className="container">
         <Header started={start} />
-        {!start && <Menu startHandler={startTrivia} highScore={200} />}
-        {start && <Trivia />}
+        {!openedMenu && <Menu />}
+        {openedMenu === MenuTypes.GAME && <Trivia />}
       </div>
     </div>
   );
