@@ -76,6 +76,7 @@ export const Answer: FC<AnswerPops> = ({
         {questionCount >= 15 && (
           <div
             onClick={() => {
+              setSubmitted(true);
               resetTimer();
               handleNext();
             }}
