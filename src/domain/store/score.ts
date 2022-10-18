@@ -6,7 +6,7 @@ interface ScoreStoreState {
   decreaseScore: (n: number) => void;
 }
 
-export const useScoreStore = create((set) => ({
+export const useScoreStore = create<ScoreStoreState>((set) => ({
   score: 0,
   increaseScore: (n: number) =>
     set((state: ScoreStoreState) => ({ score: state.score + n })),
