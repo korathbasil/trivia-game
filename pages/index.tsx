@@ -2,8 +2,16 @@ import type { NextPage } from "next";
 import Head from "next/head";
 
 import styles from "../styles/Home.module.css";
+import { Header, Menu, Trivia } from "components";
+import { useState } from "react";
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
+  const [start, setStart] = useState(false);
+
+  function startTrivia() {
+    setStart(true);
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,9 +20,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h3>Trivia Game</h3>
+      <div className="container">
+        <Header />
+        {!start && <Menu startHandler={startTrivia} />}
+        {start && <Trivia />}
+      </div>
     </div>
   );
 };
 
-export default Home;
+export default HomePage;
