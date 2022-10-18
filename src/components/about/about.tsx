@@ -18,8 +18,9 @@ export const About = () => {
           <p>Powered By : </p>
         </div>
         <div>
-          <p>Open Trivia Database</p>
-          <p>https://opentdb.com/</p>
+          <a href="https://opentdb.com" target="_blank">
+            <p>Open Trivia Database</p>
+          </a>
         </div>
       </div>
       <div className={styles.item}>
@@ -27,7 +28,7 @@ export const About = () => {
           <p>GitHub : </p>
         </div>
         <div>
-          <a href="https://github.com/korathbasil/trivia-game">
+          <a href="https://github.com/korathbasil/trivia-game" target="_blank">
             <p>korathbasil/trivia-game</p>
           </a>
         </div>
