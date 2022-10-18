@@ -50,7 +50,7 @@ export const Answer: FC<AnswerPops> = ({
     return () => {
       clearInterval(tick);
     };
-  }, [timer]);
+  }, [timer, submitted, decreaseTimer]);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();

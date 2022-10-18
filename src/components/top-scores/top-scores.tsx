@@ -32,7 +32,7 @@ export const TopScores = () => {
         </div>
       )}
       {scores.map((sc) => (
-        <p>
+        <p key={sc.date}>
           {sc.score} - {sc.date}
         </p>
       ))}

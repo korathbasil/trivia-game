@@ -21,7 +21,7 @@ export const Result = () => {
     scores.push(newScore);
 
     localStorage.setItem("SCORES", JSON.stringify(scores));
-  }, []);
+  }, [scoreStore.score]);
 
   return (
     <section className={styles.result}>
