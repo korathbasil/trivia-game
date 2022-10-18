@@ -1,11 +1,16 @@
-import { MenuTypes } from "app/constants";
+import { FC, FormEvent, useEffect, useState } from "react";
 import {
   useAnswersStore,
   useMenuStore,
   useScoreStore,
   useTimerStore,
 } from "domain/store";
-import { FC, FormEvent, useEffect, useState } from "react";
+import { MenuTypes } from "app/constants";
+import {
+  CORRECT_ANSWER_MULTIPLIER,
+  MAX_QUEESTIONS_LIMIT,
+} from "domain/constants";
+
 import styles from "./answer.module.scss";
 
 interface AnswerPops {
@@ -58,7 +63,7 @@ export const Answer: FC<AnswerPops> = ({
 
     if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
       increaseCorrect();
-      const points = timer * 10;
+      const points = timer * CORRECT_ANSWER_MULTIPLIER;
       setPoints(points);
       increaseScore(points);
     } else {
@@ -81,7 +86,7 @@ export const Answer: FC<AnswerPops> = ({
         <button disabled={!answer || submitted || timer <= 0} type="submit">
           Submit
         </button>
-        {questionCount < 15 && (
+        {questionCount < MAX_QUEESTIONS_LIMIT && (
           <div
             onClick={() => {
               if (!submitted) {
@@ -94,7 +99,7 @@ export const Answer: FC<AnswerPops> = ({
             <p>{submitted || timer <= 0 ? "Next" : "Skip"}</p>
           </div>
         )}
-        {questionCount >= 15 && (
+        {questionCount >= MAX_QUEESTIONS_LIMIT && (
           <div
             onClick={() => {
               if (!submitted) {
