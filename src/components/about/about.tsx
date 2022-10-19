@@ -18,7 +18,7 @@ export const About = () => {
           <p>Powered By : </p>
         </div>
         <div>
-          <a href="https://opentdb.com" target="_blank">
+          <a href="https://opentdb.com" target="_blank" rel="noreferrer">
             <p>Open Trivia Database</p>
           </a>
         </div>
@@ -28,7 +28,11 @@ export const About = () => {
           <p>GitHub : </p>
         </div>
         <div>
-          <a href="https://github.com/korathbasil/trivia-game" target="_blank">
+          <a
+            href="https://github.com/korathbasil/trivia-game"
+            target="_blank"
+            rel="noreferrer"
+          >
             <p>korathbasil/trivia-game</p>
           </a>
         </div>
