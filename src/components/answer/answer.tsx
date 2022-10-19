@@ -152,7 +152,7 @@ export const Answer: FC<AnswerPops> = ({
             {formik.values.ans.trim().toLowerCase() ===
             correctAnswer.toLowerCase()
               ? `Correct Answer ${points} points`
-              : "Incorrect Answer"}
+              : "Incorrect Answer -50 points"}
           </h3>
         )}
       </div>
