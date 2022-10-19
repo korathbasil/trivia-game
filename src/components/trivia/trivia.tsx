@@ -6,6 +6,7 @@ import styles from "./trivia.module.scss";
 import { Spinner, Question as QuestionUI, Answer } from "components";
 import { useMenuStore, useTimerStore } from "domain/store";
 import { MenuTypes } from "app/constants";
+import { MAX_QUEESTIONS_LIMIT } from "domain/constants";
 
 export const Trivia = () => {
   const timer = useTimerStore((state) => state.timer);
@@ -21,7 +22,7 @@ export const Trivia = () => {
   }, [count]);
 
   function handleNext() {
-    if (count <= 15) {
+    if (count <= MAX_QUEESTIONS_LIMIT) {
       setCount((c) => c + 1);
       setQuestion(null);
     }

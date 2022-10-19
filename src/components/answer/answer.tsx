@@ -1,4 +1,6 @@
-import { FC, FormEvent, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import {
   useAnswersStore,
   useMenuStore,
@@ -24,6 +26,18 @@ export const Answer: FC<AnswerPops> = ({
   questionCount,
   handleNext,
 }) => {
+  // Form
+  const validationSchema = Yup.object({
+    ans: Yup.string().min(1).max(100),
+  });
+  const formik = useFormik({
+    initialValues: {
+      ans: "",
+    },
+    validationSchema,
+    onSubmit: handleSubmit,
+  });
+
   const setOpenedMenu = useMenuStore((state) => state.setOpenedMenu);
 
   const timer = useTimerStore((state) => state.timer);
@@ -39,7 +53,6 @@ export const Answer: FC<AnswerPops> = ({
     (state) => state.increaseUnattended
   );
 
-  const [answer, setAnswer] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [points, setPoints] = useState(10);
 
@@ -57,11 +70,10 @@ export const Answer: FC<AnswerPops> = ({
     };
   }, [timer, submitted, decreaseTimer]);
 
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
+  function handleSubmit() {
     setSubmitted(true);
 
-    if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
+    if (formik.values.ans.toLowerCase() === correctAnswer.toLowerCase()) {
       increaseCorrect();
       const points = timer * CORRECT_ANSWER_MULTIPLIER;
       setPoints(points);
@@ -72,18 +84,22 @@ export const Answer: FC<AnswerPops> = ({
     }
   }
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <form onSubmit={formik.handleSubmit} className={styles.form}>
       <label htmlFor="ans">Please enter your answer below.</label>
       <input
         type="text"
         name="ans"
         id="ans"
-        onChange={(e) => setAnswer(e.target.value)}
-        value={answer}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.ans}
         disabled={submitted || timer <= 0}
       />
       <div className={styles.actions}>
-        <button disabled={!answer || submitted || timer <= 0} type="submit">
+        <button
+          disabled={!formik.values.ans || submitted || timer <= 0}
+          type="submit"
+        >
           Submit
         </button>
         {questionCount < MAX_QUEESTIONS_LIMIT && (
@@ -117,12 +133,12 @@ export const Answer: FC<AnswerPops> = ({
           <h3
             style={{
               color:
-                answer.toLowerCase() === correctAnswer.toLowerCase()
+                formik.values.ans.toLowerCase() === correctAnswer.toLowerCase()
                   ? "var(--clr-green-yellow)"
                   : "var(--clr-danger)",
             }}
           >
-            {answer.toLowerCase() === correctAnswer.toLowerCase()
+            {formik.values.ans.toLowerCase() === correctAnswer.toLowerCase()
               ? `Correct Answer ${points} points`
               : "Incorrect Answer"}
           </h3>

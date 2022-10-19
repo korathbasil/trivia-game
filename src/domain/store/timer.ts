@@ -1,4 +1,5 @@
 import create from "zustand";
+import { MAX_TIME_LIMIT } from "domain/constants";
 
 interface TimerStoreState {
   timer: number;
@@ -7,13 +8,13 @@ interface TimerStoreState {
 }
 
 export const useTimerStore = create<TimerStoreState>((set) => ({
-  timer: 15,
+  timer: MAX_TIME_LIMIT,
   decreaseTimer: (n: number) =>
     set((state: TimerStoreState) => ({
       timer: state.timer - n,
     })),
   resetTimer: () =>
     set({
-      timer: 15,
+      timer: MAX_TIME_LIMIT,
     }),
 }));
