@@ -1,4 +1,5 @@
 export type Score = {
-  date: string;
+  id: string;
   score: number;
+  date: string;
 };

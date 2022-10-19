@@ -33,7 +33,7 @@ export const TopScores = () => {
       )}
       <div className={styles.scores}>
         {scores.map((sc) => (
-          <p key={sc.date}>
+          <p key={sc.id}>
             {sc.score} - {sc.date}
           </p>
         ))}

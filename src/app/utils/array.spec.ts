@@ -1,16 +1,16 @@
 import { sortScores } from "./array";
+import { NanoId } from "./nano-id";
 
 describe("sortSCore function", () => {
   const arr = [
     {
+      id: NanoId.new(),
       score: 120,
       date: new Date().toDateString(),
     },
+    { id: NanoId.new(), score: 270, date: new Date().toDateString() },
     {
-      score: 270,
-      date: new Date().toDateString(),
-    },
-    {
+      id: NanoId.new(),
       score: 85,
       date: new Date().toDateString(),
     },
@@ -18,6 +18,7 @@ describe("sortSCore function", () => {
 
   it("returns an array containing Score objects", () => {
     const res = sortScores(arr);
+    expect(res[0]).toHaveProperty("id");
     expect(res[0]).toHaveProperty("score");
     expect(res[0]).toHaveProperty("date");
   });
