@@ -18,7 +18,12 @@
     place-items: center;
   }
 
-  p {
-    text-align: center;
+  .scores {
+    display: flex;
+    flex-direction: column-reverse;
+
+    p {
+      text-align: center;
+    }
   }
 }

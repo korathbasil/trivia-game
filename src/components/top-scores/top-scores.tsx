@@ -31,11 +31,13 @@ export const TopScores = () => {
           <p>No scores.</p>
         </div>
       )}
-      {scores.map((sc) => (
-        <p key={sc.date}>
-          {sc.score} - {sc.date}
-        </p>
-      ))}
+      <div className={styles.scores}>
+        {scores.map((sc) => (
+          <p key={sc.date}>
+            {sc.score} - {sc.date}
+          </p>
+        ))}
+      </div>
     </section>
   );
 };
