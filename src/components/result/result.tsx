@@ -1,7 +1,7 @@
-import { NanoId } from "app/utils";
+import { useEffect } from "react";
 import { Score } from "domain/models";
 import { useAnswersStore, useMenuStore, useScoreStore } from "domain/store";
-import { useEffect } from "react";
+
 import styles from "./result.module.scss";
 
 export const Result = () => {
@@ -16,7 +16,7 @@ export const Result = () => {
       scores = JSON.parse(localStorage.getItem("SCORES")!);
     }
     const newScore = {
-      id: NanoId.new(),
+      id: (Math.random() + 1).toString(36).substring(7),
       score: scoreStore.score,
       date: new Date().toDateString(),
     };

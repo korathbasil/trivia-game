@@ -1,16 +1,19 @@
 import { sortScores } from "./array";
-import { NanoId } from "./nano-id";
 
 describe("sortSCore function", () => {
   const arr = [
     {
-      id: NanoId.new(),
+      id: new Date().toISOString(),
       score: 120,
       date: new Date().toDateString(),
     },
-    { id: NanoId.new(), score: 270, date: new Date().toDateString() },
     {
-      id: NanoId.new(),
+      id: new Date().toISOString(),
+      score: 270,
+      date: new Date().toDateString(),
+    },
+    {
+      id: new Date().toISOString(),
       score: 85,
       date: new Date().toDateString(),
     },
