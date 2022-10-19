@@ -34,7 +34,7 @@
     - Zustand - State Management
     - SASS - To handle CSS
     - Jest - Testing
-    - TYpeScript - Language used.
+    - TypeScript - Language used.
 
 ## HOW TO RUN
 
