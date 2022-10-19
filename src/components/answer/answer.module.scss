@@ -13,8 +13,14 @@
     outline: none;
     border: 2px solid var(--clr-primary);
     padding: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
     font-size: 20px;
+  }
+
+  .errContainer {
+    min-height: 20px;
+    color: var(--clr-danger);
+    margin-bottom: 0.5rem;
   }
 
   .actions {

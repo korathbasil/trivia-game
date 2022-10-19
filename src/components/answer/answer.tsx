@@ -28,7 +28,10 @@ export const Answer: FC<AnswerPops> = ({
 }) => {
   // Form
   const validationSchema = Yup.object({
-    ans: Yup.string().min(1).max(100),
+    ans: Yup.string()
+      .required("Answer is required")
+      .min(1, "Minimum 1 character required")
+      .max(100, "Maximum 100 characters allowed"),
   });
   const formik = useFormik({
     initialValues: {
@@ -73,7 +76,9 @@ export const Answer: FC<AnswerPops> = ({
   function handleSubmit() {
     setSubmitted(true);
 
-    if (formik.values.ans.toLowerCase() === correctAnswer.toLowerCase()) {
+    if (
+      formik.values.ans.trim().toLowerCase() === correctAnswer.toLowerCase()
+    ) {
       increaseCorrect();
       const points = timer * CORRECT_ANSWER_MULTIPLIER;
       setPoints(points);
@@ -95,9 +100,14 @@ export const Answer: FC<AnswerPops> = ({
         value={formik.values.ans}
         disabled={submitted || timer <= 0}
       />
+      <div className={styles.errContainer}>
+        {formik.errors.ans && <p>{formik.errors.ans}</p>}
+      </div>
       <div className={styles.actions}>
         <button
-          disabled={!formik.values.ans || submitted || timer <= 0}
+          disabled={
+            !formik.values.ans || submitted || timer <= 0 || !!formik.errors.ans
+          }
           type="submit"
         >
           Submit
@@ -133,12 +143,14 @@ export const Answer: FC<AnswerPops> = ({
           <h3
             style={{
               color:
-                formik.values.ans.toLowerCase() === correctAnswer.toLowerCase()
+                formik.values.ans.trim().toLowerCase() ===
+                correctAnswer.toLowerCase()
                   ? "var(--clr-green-yellow)"
                   : "var(--clr-danger)",
             }}
           >
-            {formik.values.ans.toLowerCase() === correctAnswer.toLowerCase()
+            {formik.values.ans.trim().toLowerCase() ===
+            correctAnswer.toLowerCase()
               ? `Correct Answer ${points} points`
               : "Incorrect Answer"}
           </h3>
