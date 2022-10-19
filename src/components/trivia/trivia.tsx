@@ -4,14 +4,17 @@ import { Question } from "domain/models";
 
 import styles from "./trivia.module.scss";
 import { Spinner, Question as QuestionUI, Answer } from "components";
-import { useTimerStore } from "domain/store";
+import { useMenuStore, useTimerStore } from "domain/store";
+import { MenuTypes } from "app/constants";
 
 export const Trivia = () => {
   const timer = useTimerStore((state) => state.timer);
   const resetTimer = useTimerStore((state) => state.resetTimer);
+  const setOpenedMenu = useMenuStore((state) => state.setOpenedMenu);
 
   const [count, setCount] = useState(1);
   const [question, setQuestion] = useState<Question | null>(null);
+  const [err, setErr] = useState("");
 
   useEffect(() => {
     fetchQuestion();
@@ -26,17 +29,19 @@ export const Trivia = () => {
 
   async function fetchQuestion() {
     try {
-      const questions = await QuestionsService.getOneQuestion();
+      const question = await QuestionsService.getOneQuestion();
 
-      if (questions) {
-        setQuestion(questions[0]);
+      if (question) {
+        setQuestion(question);
       }
-    } catch (error) {}
+    } catch (error: any) {
+      setErr(error.message);
+    }
   }
 
   return (
     <section className={styles.trivia}>
-      {!question && (
+      {!question && !err && (
         <div className={styles.spinnerContainer}>
           <Spinner />
         </div>
@@ -50,6 +55,20 @@ export const Trivia = () => {
         />
       )}
       <p className={styles.title}>Question {count}</p>
+      {err && !question && (
+        <div className={styles.err}>
+          <p>{err}</p>
+
+          <h4
+            onClick={() => {
+              resetTimer();
+              setOpenedMenu(MenuTypes.HOME);
+            }}
+          >
+            Go to Menu
+          </h4>
+        </div>
+      )}
     </section>
   );
 };

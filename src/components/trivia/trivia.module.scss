@@ -19,4 +19,15 @@
     top: -16px;
     left: 20px;
   }
+
+  .err {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    p {
+      margin-bottom: 1rem;
+    }
+  }
 }

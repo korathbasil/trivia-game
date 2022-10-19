@@ -12,10 +12,12 @@ export class QuestionsService {
       const res = await axios.get<GetOneQuestionResponse>(
         "/api.php?amount=1&difficulty=easy"
       );
-
-      return res.data.results;
-    } catch (error) {
-      console.error(error);
+      if (res.status !== 200) {
+        throw new Error("Internal server error !!");
+      }
+      return res.data.results[0];
+    } catch (error: any) {
+      throw new Error(error.message);
     }
   }
 }
