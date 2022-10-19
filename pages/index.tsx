@@ -10,7 +10,7 @@ const HomePage: NextPage = () => {
   const openedMenu = useMenuStore((state) => state.openedMenu);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.root}>
       <Head>
         <title>Trivia Game</title>
         <meta name="description" content="Trivia Game" />
